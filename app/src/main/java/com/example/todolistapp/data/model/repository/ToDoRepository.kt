@@ -1,9 +1,11 @@
 package com.example.todolistapp.data.model.repository
 
-import com.example.todolistapp.data.model.ToDoItem
+import com.example.todolistapp.data.model.local.entity.Task
 
-interface ToDoRepository {fun getToDos(): List<ToDoItem>
-    fun addToDo(item: ToDoItem)
-    fun updateToDo(item: ToDoItem)
-    fun deleteToDo(id: Int)
+
+interface ToDoRepository {
+    suspend fun getAllTasks(): List<Task>
+    suspend fun insertTask(task: Task)
+    suspend fun deleteTask(task: Task)
 }
+

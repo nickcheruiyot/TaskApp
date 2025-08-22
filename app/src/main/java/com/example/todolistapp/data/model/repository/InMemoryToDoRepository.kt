@@ -1,22 +1,17 @@
 package com.example.todolistapp.data.model.repository
 
 import com.example.todolistapp.data.model.ToDoItem
+import com.example.todolistapp.data.model.local.entity.Task
 
 object InMemoryToDoRepository : ToDoRepository {
-    private val todos = mutableListOf<ToDoItem>()
+    private val tasks = mutableListOf<Task>()
 
-    override fun getToDos(): List<ToDoItem> = todos
+    override suspend fun getAllTasks(): List<Task> = tasks
 
-    override fun addToDo(item: ToDoItem) {
-        todos.add(item)
+    override suspend fun insertTask(task: Task) {
+        tasks.add(task)
     }
 
-    override fun updateToDo(item: ToDoItem) {
-        val index = todos.indexOfFirst { it.id == item.id }
-        if (index != -1) todos[index] = item
-    }
-
-    override fun deleteToDo(id: Int) {
-        todos.removeAll { it.id == id }
-    }
-}
+    override suspend fun deleteTask(task: Task) {
+        tasks.removeIf { it.id == task.id }
+    }}
